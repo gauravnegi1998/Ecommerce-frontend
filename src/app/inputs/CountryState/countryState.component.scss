@@ -1,0 +1,16 @@
+.form-Control {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    select {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1px solid #ff6a00;
+        background: #fff !important;
+
+        &:focus-visible {
+            outline: none;
+        }
+    }
+}

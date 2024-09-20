@@ -1,0 +1,13 @@
+<div class="field_section" [ngClass]="{'iconAdded': !!icon}">
+    <label [for]="name">{{inputLabel}}</label>
+    <input [type]="type" [placeholder]="placeholder" [name]="name" [(ngModel)]="value"
+        (ngModelChange)="_handleChange($event)" (blur)="onTouchFormInputValue($event)" />
+
+    @if(icon){
+    <div class="icon_section">
+        <ng-content />
+    </div>
+    }
+
+
+</div>

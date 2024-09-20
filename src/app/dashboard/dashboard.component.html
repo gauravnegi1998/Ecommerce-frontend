@@ -1,0 +1,75 @@
+<div class=" admin_dashboard">
+    <div class="main row mt-6">
+        <div class="col-md-12 nav-header">
+            <nav class="navbar navbar-light bg-light">
+                <div class="container-fluid navbar_contents">
+                    <p (click)="isActivePanel= !isActivePanel">
+                        <lucide-icon name="menu" class="hand_cursor" size="24" />
+                    </p>
+                    <a class="navbar-brand"> </a>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                </div>
+            </nav>
+        </div>
+        <div class="col-md-12 admin_dashboard-content">
+            <section *ngIf="!!isActivePanel" class="section1">
+                <div class="menu_options pad">
+                    <div class="profile_detail">
+                        <button>{{shortName|uppercase}}</button>
+                        <div class="profile_content">
+                            <h3>{{loginUserData.firstName}} {{loginUserData.lastName}}</h3>
+                            <span>5 members</span>
+                        </div>
+                    </div>
+
+                    <div class="menus">
+                        @for(menuOption of getMenuItems(); track menuSections; let i = $index){
+                        <div class="option">
+                            <h2>{{menuSections?.[menuOption]?.title | uppercase}}</h2>
+                            <ul class="child_options">
+                                @for(childOptions of menuSections?.[menuOption]?.options; track childOptions; let i=
+                                $index){
+                                <li [ngClass]='{"active":(childOptions.label === activeOption)}'
+                                    (click)="handleActiveClass(childOptions.label)">
+                                    <span><lucide-icon size="20" name={{childOptions.icon}}
+                                            class="option_icon" /></span>
+                                    <span>{{childOptions.label}}</span>
+                                </li>
+                                }
+                            </ul>
+                        </div>
+                        }
+                    </div>
+                </div>
+            </section>
+            <section [ngClass]="{'panelHidden':!isActivePanel}" class="section2">
+                <div class="content_data pad">
+                    <div class="content_title">
+                        <h2 class="">{{activeOption}}</h2>
+                    </div>
+                    @switch (activeOption) {
+                    @case ("Customers") {
+                    <div><app-userDetail /></div>
+                    }
+                    @case ("Products") {
+                    <div></div>
+
+                    }
+                    @case ("All files") {
+                    <div></div>
+
+                    }
+                    @default {
+                    <div></div>
+
+                    }
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+
+</div>

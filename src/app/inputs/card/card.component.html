@@ -1,0 +1,26 @@
+<div class="card mb-3" style="max-width: 420px;">
+    <div class="row g-0">
+        <div class="col-md-4 imageSection">
+            <img src="https://i.pravatar.cc/150?img={{'6'+ currentIndex}}" class="img-fluid rounded-start" alt="...">
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h2 class="card-title">{{userDetail.firstName}} {{userDetail.lastName}}</h2>
+                <div class="card-content">
+                    <p class="card-text">
+                        <strong>Email:</strong> {{userDetail.email}}
+                    </p>
+                    <p class="card-text">
+                        <strong>Address:</strong>
+                        {{userDetail.address}},{{userDetail.country}},{{userDetail.state}},{{userDetail.city}},{{userDetail.zipCode}}
+                    </p>
+                    <p class="card-text">
+                        <strong>Phone:</strong>{{userDetail.phoneNumber}}
+                    </p>
+                    <!-- <p class="card-text">: </p> -->
+                </div>
+                <ng-content />
+            </div>
+        </div>
+    </div>
+</div>

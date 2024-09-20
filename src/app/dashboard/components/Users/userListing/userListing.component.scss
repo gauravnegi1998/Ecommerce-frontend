@@ -1,0 +1,150 @@
+.user_listing {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 20px;
+    display: flex;
+    position: relative;
+
+    table {
+        &.first_table {
+            width: 100%;
+            // max-width: calc(100% - 200px);
+        }
+
+        &.second_table {
+            position: sticky;
+            right: 0;
+            background: #fff;
+            width: 100%;
+            max-width: 100px;
+
+            th,
+            td {
+                border-left: 1px solid #ff6521;
+            }
+        }
+
+        margin-bottom: 30px;
+
+        th {
+            color: #ff6521;
+        }
+
+        th,
+        td {
+            white-space: nowrap;
+            border-bottom: 1px solid #ff6521a8;
+            padding: 10px;
+            height: 60px;
+
+            Form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            input[type="text"] {
+                width: 100%;
+                min-width: 100px;
+                padding: 4px;
+                border: 1px solid #ff6521;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+
+            select {
+                width: 100%;
+                min-width: 200px;
+                padding: 5px;
+                border: 1px solid #ff6521;
+                background: #fff;
+
+                &:focus-visible {
+                    outline: none;
+                }
+            }
+
+            .card-actions.d-flex {
+                gap: 10px;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.search_section {
+    padding: 40px 0 30px;
+    text-align: center;
+
+    .search_by_field {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 0 0 auto;
+
+        .dropdown_list {
+            position: relative;
+
+            .filter_by {
+                display: flex;
+                border: 1px solid #ff6521;
+                padding: 10px 6px 10px 10px;
+                font-size: 16px;
+                align-items: center;
+                border-right: unset;
+                background: #fff;
+                cursor: pointer;
+                width: 100%;
+                min-width: 150px;
+                max-width: 150px;
+                justify-content: space-around;
+
+                p {
+                    margin: 0;
+                }
+            }
+
+            ul {
+                list-style: none;
+                margin: 0;
+                padding: 0;
+                text-align: left;
+                // border: 1px solid #ddd;
+                box-shadow: 0 0 2px 1px #ddd;
+                width: 100%;
+                max-width: 150px;
+
+                position: absolute;
+                z-index: 9999;
+                background: #fff;
+
+                li {
+                    padding: 7px 7px 7px 15px;
+                    border-bottom: 1px solid #ddd;
+                    cursor: pointer;
+
+                    &:hover {
+                        background: #ddd;
+                    }
+                }
+
+                &.hide {
+                    display: none;
+                }
+            }
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ff6521;
+            margin: 0 auto;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+
+}

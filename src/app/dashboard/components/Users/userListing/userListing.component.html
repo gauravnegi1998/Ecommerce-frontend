@@ -1,0 +1,154 @@
+<div class="">
+    <div class="search_section">
+        <div class="search_by_field">
+            <!-- <div class="dropdown_list">
+                <div class="filter_by" (click)="_handleFilterByClick()">
+                    <p>{{filterBy.name}} :</p>
+                    <p>
+                        @if(displayDropdown){
+                        <lucide-icon name="chevron-up"></lucide-icon>
+                        }@else {
+                        <lucide-icon name="chevron-down"></lucide-icon>
+                        }
+                    </p>
+                </div>
+                <ul [class]="!displayDropdown ? 'hide':'show'">
+                    @for (item of filterByOptions; track item) {
+                    <li (click)="_handleFilterByClick(item?.query)">{{item?.name}}</li>
+                    }
+
+                </ul>
+            </div> -->
+            <input type="text" placeholder="Search" [(ngModel)]="searchText" (ngModelChange)="_handelSearch($event)" />
+        </div>
+    </div>
+
+    <div class="user_listing">
+        <table class="first_table">
+            <thead>
+                <tr>
+                    @for(heading of theadData; track heading; let i= $index){
+                    <th>{{heading}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for(user of usersData| paginate:config; track user; let index = $index){
+                <tr>
+                    <td>{{index+1}}</td>
+                    <td *ngFor="let item of _userDataKeys">
+
+                        <div *ngIf="(selectedAction ==='edit' && selectedUser?._id ===user?._id); else textValue">
+                            <Form [formGroup]="formGroupData" novalidate #myForm="ngForm">
+                                <input *ngIf="!['country','state','role','birthday'].includes(item)"
+                                    [formControlName]="item" type="text" value="{{_userValue(user, item)}}" />
+                                <select *ngIf="!!['role'].includes(item)" formControlName="role">
+                                    <option *ngFor="let roleData of ['admin','lead','customer','prime_member'];"
+                                        [value]="roleData">
+                                        {{roleData}}
+                                    </option>
+                                </select>
+                                <app-datePicker *ngIf="!!['birthday'].includes(item)" formControlName="birthday"
+                                    [class]="'user_listing'" [name]="'birthday'" />
+
+                                <!-- <ng-template> -->
+                                @if(formGroupData.get(item)?.touched || myForm.submitted){
+                                @if(formGroupData.get(item)?.errors?.['required']){
+                                <small class="text-danger">{{item}} is required</small>
+                                }
+                                @if(formGroupData.get(item)?.errors?.['minlength'] ||
+                                formGroupData.get(item)?.errors?.['maxlength']){
+                                <small class="text-danger">
+                                    Please enter atLeast
+                                    {{formGroupData.get(item)?.errors?.['minlength']?.requiredLength}} number
+                                </small>
+                                }
+                                }
+                                <!-- </ng-template> -->
+                            </Form>
+                            <select *ngIf="!!['country','state'].includes(item)"
+                                [(ngModel)]="countryWithStates['selected_'+item]"
+                                (ngModelChange)="_handleCountryState($event,user,item)">
+                                <option *ngFor="let countryData of countryWithStates[item];"
+                                    [value]="item === 'state'? countryData :countryData.code">
+                                    {{item === 'state'? countryData :countryData.name }}
+                                </option>
+                            </select>
+                        </div>
+
+                        <ng-template #textValue>
+                            <span>
+                                {{_userValue(user, item)}}
+                            </span>
+                        </ng-template>
+                    </td>
+
+                    <!-- <td>{{isUserLogin}}</td> -->
+                </tr>
+                }
+            </tbody>
+        </table>
+        <table class="second_table">
+            <thead>
+                <th class="text-center">Actions</th>
+            </thead>
+            <tbody>
+                @for(user of usersData; track user; let index = $index){
+                <tr>
+                    <td class="">
+                        <div class="card-actions d-flex"
+                            *ngIf="(selectedAction ==='edit' && selectedUser?._id ===user?._id); else updateButton">
+                            <app-button [type]="'button'" name="'detail'" [class]="'detail action_detail'"
+                                (_onClick)="_updateCustomerData(user)">
+                                <lucide-icon class="cross" size="20" name="check" />
+                            </app-button>
+                            <app-button [type]="'button'" [class]="'edit action_detail'" name="'edit'"
+                                (_onClick)="selectedAction = ''">
+                                <lucide-icon class="cancel" size="20" name="x" />
+                            </app-button>
+                        </div>
+                        <ng-template #updateButton>
+                            <div class="card-actions d-flex">
+                                <app-button [type]="'button'" name="'detail'" [class]="'detail action_detail'"
+                                    (_onClick)="_handleRedirect('detail',user)">
+                                    <lucide-icon class="my-icon" size="20" name="user" />
+                                </app-button>
+                                <app-button [type]="'button'" [class]="'edit action_detail'" name="'edit'"
+                                    (_onClick)="_handleRedirect('edit',user)">
+                                    <lucide-icon class="my-icon" size="20" name="pencil" />
+                                </app-button>
+                                <app-button [type]="'button'" [class]="'delete action_detail'" name="'delete'"
+                                    (_onClick)="_handleRedirect('delete',user)">
+                                    <lucide-icon class="my-icon" size="20" name="trash" />
+                                </app-button>
+                            </div>
+                        </ng-template>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <app-paginationComp [pageNumber]="1" [totalPages]="6" [config]="config"
+        (_onPageChange)="_handlePageChange($event)" />
+
+    <ng-template #myTemplate class="s > > > > > > > > > > > > > > > > > > > >">
+        <h2 mat-dialog-title>Confirmation</h2>
+        <mat-dialog-content>
+            <p>Are you sure you want to delete {{selectedUser['firstName']||""}} {{selectedUser['lastName']}}</p>
+        </mat-dialog-content>
+        <mat-dialog-actions class="actions">
+            <button mat-button (click)="_handelDeleteUser()" cdkFocusInitial>Yes</button>
+            <button mat-button [mat-dialog-close]>No</button>
+        </mat-dialog-actions>
+    </ng-template>
+
+    <ng-template #detailPage>
+        <h2 mat-dialog-title>User Details</h2>
+        <mat-dialog-content>
+            <app-detail-page />
+        </mat-dialog-content>
+    </ng-template>
+
+
+</div>

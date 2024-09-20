@@ -1,0 +1,77 @@
+<ng-template #errorSection let-err>
+    @if(_fieldValues(err?.name).touched || myForm?.submitted){
+
+    @if(_fieldValues(err?.name).errors?.['required']){
+    <small class="error-msg">this field is required</small>
+    }
+    @if(_fieldValues(err?.name).errors?.['onlyNumber']){
+    <small class="error-msg">Please enter only 4 digit value</small>
+    }
+    <!-- @if(_fieldValues(err?.name).errors?.['minlength'] &&
+    !_fieldValues(err?.name).errors?.['onlyNumber']){
+    <small class="error-msg">Enter 4 digit only</small>
+    } -->
+    }
+</ng-template>
+
+
+<div class="main_categories">
+    <section class="section_one">
+        <h1>Add Product Category</h1>
+        <form [formGroup]="categoryFormGroup" #myForm="ngForm" (ngSubmit)="_handleSubmit($event, myForm)" novalidate>
+            <div class="form_insider flex-box">
+                <div class="form-Control">
+                    <app-textfield formControlName="categoryId" name="categoryId" placeholder="Enter Category id"
+                        [label]="'Category Id'" />
+                    <ng-template *ngTemplateOutlet="errorSection; context:{ $implicit :{ name:'categoryId'} }" />
+                </div>
+                <div class="form-Control">
+                    <app-textfield formControlName="categoryName" name="categoryName" placeholder="Enter Category Name"
+                        [label]="'Category Name'" />
+                    <ng-template *ngTemplateOutlet="errorSection; context:{ $implicit: { name:'categoryName'} }" />
+                </div>
+                <div class="save_button">
+                    <app-button type="submit">
+                        Save
+                    </app-button>
+                </div>
+            </div>
+        </form>
+    </section>
+
+    <section class="section_two">
+        <h1>Category List's</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Category Id</th>
+                    <th>Category Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for(category of categories | paginate:config; track category; let index = $index){
+                <tr>
+                    <td>{{category?.categoryId}}</td>
+                    <td><span>{{category?.categoryName}}</span></td>
+                    <td>
+                        <p (click)="_handleDelete(category?._id)">
+                            <lucide-icon class="my-icon" color="#f00" size="18" name="trash" /> <span>Delete</span>
+                        </p>
+                    </td>
+                </tr>
+                }
+                <tr *ngIf="(categories | length) === 0">
+                    <td colspan="3">No Record Found</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <ng-container *ngIf="(categories | length) > 0">
+            <app-paginationComp [config]="config" />
+        </ng-container>
+
+
+    </section>
+
+</div>

@@ -1,1 +1,219 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+    --primery-color: "#e78c8c"
+}
+
+@layer reset, primeng;
+
+/* Reset CSS */
+@layer reset {
+    .p-dialog.p-dialog-resizable {
+        width: 100%;
+        max-width: 500px
+    }
+
+    .button_p {
+        // width: ;
+    }
+}
+
+.w-full {
+    width: 100%;
+}
+
+.relative {
+    position: relative;
+}
+
+.container {
+    width: 100%;
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+::-webkit-scrollbar {
+    width: 8px !important;
+    height: 4px;
+    /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+    background: #ddd;
+    /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #000;
+    /* color of the scroll thumb */
+    border-radius: 20px;
+    /* roundness of the scroll thumb */
+    border: 1px solid #000;
+    /* creates padding around scroll thumb */
+}
+
+.hand_cursor {
+    cursor: pointer;
+}
+
+
+.form-Control {
+    margin-bottom: 15px;
+}
+
+.text-danger {
+    color: #f00;
+}
+
+.my-icon {
+    font-size: 20px;
+}
+
+.flex-box {
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+}
+
+.card-body .card-actions {
+    // border: 1px solid;
+    gap: 10px;
+    margin-top: 8px;
+
+    .action_button button {
+        padding: 8px !important;
+    }
+}
+
+.error-msg {
+    margin: 2px 0 0 !important;
+    color: #f00;
+}
+
+.success-msg {
+    margin: 10px 0 0 !important;
+    color: green;
+}
+
+h2.mdc-dialog__title {
+    color: #ff6521;
+    border-bottom: 2px solid #ff6521;
+}
+
+
+
+.delete-modal {
+    color: #ff6521;
+
+    .mat-mdc-dialog-content {
+        padding-bottom: 8px !important;
+
+        p {
+            padding-bottom: 0px;
+        }
+    }
+
+    .mdc-dialog__actions.actions {
+        justify-content: center !important;
+
+        button {
+            background: #ff6521;
+            border: 1px solid #ff6521;
+            color: #fff;
+            font-weight: 600;
+
+            &:hover {
+                background: transparent;
+                color: #ff6521;
+            }
+        }
+    }
+}
+
+.productCategory_select {
+    width: 100%;
+
+    button {
+        padding: 10px 16px;
+        font-size: 15px;
+        border: 1px solid #ff6a00;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        color: #000;
+        border-radius: unset;
+        // color: #939191;
+
+        &:hover,
+        &:active {
+            background: #fff !important;
+            border: 1px solid #ff6a00 !important;
+            color: #939191 !important;
+        }
+
+    }
+
+    .dropdown-menu {
+        width: 100%;
+
+        .dropdown-item {
+            color: #000;
+
+            span:first-child {
+                display: flex;
+                gap: 10px;
+            }
+
+            &.active {
+                background: unset;
+                color: #ff6521;
+
+            }
+        }
+    }
+
+    &:focus {
+        box-shadow: unset;
+    }
+}
+
+svg.star_rating_icon {
+    cursor: pointer;
+}
+
+.rating_icons {
+    cursor: pointer;
+
+    &>svg {
+        fill: #ff0 !important;
+    }
+}
+
+.divider {
+    border: 1px solid #dddd;
+    display: block;
+}
+
+.edit-modal {
+    // border: 1px solid #000;
+
+    mat-dialog-content.mat-mdc-dialog-content.mdc-dialog__content {
+        max-height: unset;
+    }
+}
+
+// .option_icon {
+//     color: #979797d4
+// }

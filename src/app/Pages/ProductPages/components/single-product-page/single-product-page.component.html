@@ -1,0 +1,133 @@
+<ng-template #revieTemp let-review>
+    <div class="reviewAdd_Form">
+        <div class="rating_text">
+            <div class="rateSelection">
+                <lucide-icon *ngFor="let rating of _arrayConverter(5); index as i" name="star" size="30" color="#d2691e"
+                    class="star_rating_icon" [ngClass]="{'rating_icons': !!this.ratingAdded.includes(i+1)}"
+                    (click)="_ratingCheck(i+1)" />
+            </div>
+            <span *ngIf="FeelAboutRating">{{FeelAboutRating}} !</span>
+        </div>
+        <app-textfield [label]="'Subject'" [value]="ratingSubject" [placeholder]="'Enter your subject'"
+            (onChange)="ratingSubject = $event" />
+        <textarea rows="5" placeholder="Message" [value]="ratingText" (change)="_handleTextChange($event)"></textarea>
+        <div>
+            <div class="actions_review_button">
+                <app-button (_onClick)="_handleReview('add')">{{editActive ? "Update":"Add"}}</app-button>
+                <app-button (_onClick)="_handleReview('cancel')">cancel</app-button>
+            </div>
+            <p class="error-msg" *ngIf="!!ErrorMsg">{{ErrorMsg}}</p>
+        </div>
+    </div>
+</ng-template>
+
+<section class="singleProduct_page_section">
+    <div class="ProductInfo">
+        <div class="image_sections">
+            <img src="{{singleProductData?.normalImage}}" />
+        </div>
+        <div class="content_section">
+            <div class="innerSec">
+                <h1>{{singleProductData?.name}}</h1>
+                <div class="description_sec">
+                    <p class="bold">Description :</p>
+                    <p>{{singleProductData?.description}}</p>
+                </div>
+                <div class="price_sec">
+                    <div>
+                        <span aria-hidden="true"
+                            class="a-size-large a-color-price savingPriceOverride aok-align-center reinventPriceSavingsPercentageMargin savingsPercentage">
+                            {{discountPercentage}}
+                        </span>
+                        <span aria-hidden="true">
+                            <!-- <span class="a-price-symbol">₹</span> -->
+                            <span class="a-price-whole">
+                                {{singleProductData?.price?.offerPrice | currency}}
+                            </span>
+                        </span>
+                    </div>
+                    <span id="taxInclusiveMessage" class="a-size-mini a-color-base aok-align-center aok-nowrap">
+                    </span>
+                    <div class="mrp_price">
+                        <span class="a-size-small aok-offscreen">
+                            M.R.P.:
+                            {{singleProductData?.price?.normalPrice|currency}} </span>
+                    </div>
+                </div>
+                <!-- <div>{{singleProductData | json}}</div> -->
+                <div class="action_section">
+                    <div class="qty_sec">
+                        <p class="bold">Quantity:</p>
+                        <div class="qty">
+                            <button (click)="_handleQty('sub')">-</button>
+                            <input type="text" readonly value="{{singleProductData?.quantity}}" />
+                            <button (click)="_handleQty('add')">+</button>
+                        </div>
+
+                    </div>
+                    <div class="button_actions">
+                        <app-button [type]="'button'" (_onClick)="_addToCart()">Add to cart</app-button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="review_Sections">
+        <div class="rating_heading">
+            <div class="rating_count">
+                <h2>Review's:</h2>
+                <div class="bold"><b>{{(singleProductData.reviews | length)||0}}</b></div>
+            </div>
+            <p *ngIf="isUserLogin" class="add_review" (click)="activeReview =!activeReview">Add a review</p>
+        </div>
+        <div class="customer_reviews">
+            @if(isUserLogin && activeReview && !editActive){
+            <ng-template [ngTemplateOutlet]="revieTemp"></ng-template>
+            }
+            <div class="reviews">
+                @for(review of singleProductData?.reviews; track review; let i= $index){
+                <ng-container>
+                    <div class="details">
+                        <h3>{{review?.user?.firstName}} {{review?.user?.lastName}}</h3>
+                        <ng-container *ngIf="(editActive !== review?._id); else editPage">
+                            <div class="stars">
+                                <lucide-icon *ngFor="let rating of _arrayConverter(5); index as i"
+                                    [ngClass]="{'rating_icons':(rating<=review?.ratingNumber)}" name="star" size="30"
+                                    color="#999879" fill="#ff0" />
+                                <span>{{review?.subject}}</span>
+                            </div>
+                            <div class="purchase_date">
+                                <span data-hook="review-date" class="a-size-base a-color-secondary review-date">
+                                    Reviewed in India on {{review?.updatedAt|dateFormat}}
+                                </span>
+                                <div class="a-row a-spacing-mini review-data review-format-strip">
+                                    <span class="a-color-secondary">Colour: Dark Grey</span>
+                                    <i class="a-icon a-icon-text-separator" role="img" aria-label="|"></i>
+                                    <span class="a-size-mini a-color-state a-text-bold">Verified Purchase</span>
+                                </div>
+                            </div>
+                            <div class="rating_desc">
+                                <p>{{review?.ratingMessage}} </p>
+                            </div>
+
+                            <div class="edit_section" *ngIf="isUserLogin === review?.user?._id">
+                                <span class="edit" (click)="_handleEditReview(review)">Edit</span>
+                                <span class="border_class"></span>
+                                <span class="delete"
+                                    (click)="_deleteReview(review?._id,review?.productId)">Delete</span>
+                            </div>
+                        </ng-container>
+
+                        <ng-template #editPage>
+                            <ng-template [ngTemplateOutlet]="revieTemp"></ng-template>
+                        </ng-template>
+                    </div>
+
+                    <span class="divider"></span>
+                </ng-container>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>

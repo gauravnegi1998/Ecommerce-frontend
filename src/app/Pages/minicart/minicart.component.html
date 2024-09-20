@@ -1,0 +1,64 @@
+<div class="relative">
+    <button class="button_cart" *ngIf="!open" (click)="_openMiniCart(true)">
+        <lucide-icon name="shopping-cart" class="cart_icon" />
+        <span class="count">{{cartData|length}}</span>
+    </button>
+</div>
+
+<div *ngIf="open" class="main_mincart_section">
+    <div class="mincart">
+        <div class="cart-heading">
+            <h1 class="title"> Shopping Cart </h1>
+            <lucide-icon name="circle-x" class="cross_icons hand_cursor" (click)="_openMiniCart(false)" />
+        </div>
+        <ng-container *ngIf="(cartData|length) > 0; else notRecord">
+
+            <div class="mini_products">
+                @for(cart of cartData; track cart; let i = $index){
+                <div>
+                    <div class="cart_box">
+                        <div class="mini_product_img">
+                            <img src="{{cart.normalImage}}" />
+                        </div>
+                        <div class="min_content">
+                            <h3>{{cart.shortName||cart.name}}</h3>
+                            <div class="qty">
+                                <button type="button" (click)="_quantityUpdate(cart._id,'sub')">-</button>
+                                <input type="text" readonly value="{{cart.quantity}}" />
+                                <button type="button" (click)="_quantityUpdate(cart._id,'add')">+</button>
+                            </div>
+                        </div>
+                        <div class="price_delete">
+                            <h2>{{cart.price | currency}}</h2>
+                            <p class=""><span class="hand_cursor" (click)="_removeCartData(cart._id)">Delete</span></p>
+                        </div>
+                    </div>
+                    <span class="divider"></span>
+                </div>
+
+                }
+            </div>
+            <div class="total_section">
+                <div class="SubTotal">
+                    <span>SubTotal ({{cartData|length}} items)</span>
+                    <span>{{subTotalOfCart | currency}}</span>
+                </div>
+                <span class="divider"></span>
+                <div class="mini_redirect">
+                    <app-button class="w-full" [class]="'minicart_button'" (_onClick)="_checkoutClick('checkout')">
+                        Checkout
+                    </app-button>
+                    <app-button class="w-full" [class]="'minicart_button'" (_onClick)="_checkoutClick('view_cart')">View
+                        Cart
+                    </app-button>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-template #notRecord>
+            <h4>Cart is empty</h4>
+        </ng-template>
+
+    </div>
+
+</div>

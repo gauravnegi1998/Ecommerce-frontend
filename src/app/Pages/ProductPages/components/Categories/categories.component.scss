@@ -1,0 +1,88 @@
+.main_categories {
+    margin: 30px;
+
+    h1 {
+        background: linear-gradient(180deg, #ec6c04 20%, #ff6169 80%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .section_one {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+
+        .form_insider {
+            box-shadow: 0 0 4px 0 #e4931a;
+            padding: 20px 10px;
+            background: linear-gradient(360deg, #fdf798 10%, #f96837 90%);
+            border-radius: 4px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+
+            .save_button {
+                margin-top: 30px;
+            }
+        }
+    }
+
+    .section_two {
+        width: 100%;
+        max-width: 800px;
+        margin: 50px auto 0;
+
+
+        table {
+            width: 100%;
+
+            tr {
+                background: #fff;
+
+                th,
+                td {
+                    border: 1px solid #e4931a;
+                    padding: 10px;
+                    text-align: center;
+                    font-weight: 600;
+
+                    &>span {
+                        display: block;
+                        /* border: 1px solid; */
+                        width: 100%;
+                        max-width: calc(100% - 180px);
+                        margin: 0 auto;
+                        text-align: left;
+                    }
+
+                    p {
+                        width: 100%;
+                        max-width: 70px;
+                        display: flex;
+                        align-items: center;
+                        margin: 0 auto;
+                        color: #f00;
+                        font-size: 16px;
+                        cursor: pointer;
+
+
+                        span:last-child {
+                            margin: 6px 0 0 2px;
+                        }
+
+                        &:hover {
+                            border-bottom: 1px solid #f00;
+                        }
+                    }
+                }
+
+                th {
+                    font-size: 16px;
+                    background: linear-gradient(180deg, rgba(253, 247, 152, 1) 10%, rgba(249, 104, 55, 1) 90%);
+                }
+            }
+
+        }
+    }
+
+}

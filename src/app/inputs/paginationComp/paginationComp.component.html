@@ -1,0 +1,36 @@
+<div class="pagination_container">
+    <pagination-template #p="paginationApi" id="{{config.id}}" (pageChange)="_onPaginateChange($event)" [maxSize]="7">
+        <div class="custom-pagination">
+            <!-- <button class="pagination-last-page" [disabled]="p.isFirstPage()" [class.disabled]="p.isFirstPage()"
+            (click)="p.setCurrent(1)">
+            first_page
+        </button> -->
+            <button class="pagination-previous button-arrow" [disabled]="p.isFirstPage()"
+                [class.disabled]="p.isFirstPage()" (click)="p.previous()">
+                <lucide-icon class="my-icon" size="30" name="chevron-left" />
+            </button>
+            <div *ngFor="let page of p.pages" class="button_div" [class.current]="p.getCurrent() === page.value">
+                <p (click)="p.setCurrent(page.value)" *ngIf="p.getCurrent() !== page.value">
+                    {{ page.label }}
+                </p>
+                <p *ngIf="p.getCurrent() === page.value" class="active_page">
+                    {{ page.label }}
+                </p>
+            </div>
+            <button class="pagination-next button-arrow" [disabled]="p.isLastPage()" [class.disabled]="p.isLastPage()"
+                (click)="p.next()">
+                <lucide-icon class="my-icon" size="30" name="chevron-right" />
+            </button>
+
+            <!-- <button class="pagination-last-page" [disabled]="p.isLastPage()" [class.disabled]="p.isLastPage()"
+            (click)="p.setCurrent(p.getLastPage())">
+            last_page
+        </button> -->
+        </div>
+
+    </pagination-template>
+    <div class="total_records">
+        <span>Total Records: </span>
+        <span>{{config.totalItems}}</span>
+    </div>
+</div>

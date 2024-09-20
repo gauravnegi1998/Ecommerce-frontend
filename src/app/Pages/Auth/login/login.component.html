@@ -1,0 +1,55 @@
+<section class="main_login_section">
+    <div class="container">
+        <div class="formSection">
+            <div class="login_section">
+                <h1>Login</h1>
+                <form [formGroup]="loginFormGroup" (ngSubmit)="_handleLoginSubmit($event)" #myform="ngForm" novalidate>
+                    <div class="form-Control">
+                        <!-- <app-textfield formControlName="email" [name]="'email'" [placeholder]="'example@gmail.com'"
+                            [label]="'E-mail'" [(value)]="emailValue" /> -->
+                        <app-textfield formControlName="email" [name]="'email'" [placeholder]="'example@gmail.com'"
+                            [label]="'E-mail'" />
+
+                        <small class="text-danger"
+                            *ngIf="Email.touched && Email.errors?.['required'] || Email.errors?.['required'] && myform?.submitted">
+                            Please enter your email
+                        </small>
+                        <small class="text-danger"
+                            *ngIf="Email.touched && Email.errors?.['email'] || Email.errors?.['email'] && myform?.submitted">
+                            E-mail is in-valid
+                        </small>
+                    </div>
+                    <div class="form-Control">
+                        <app-textfield [type]="passwordType" formControlName="password" [name]="'password'"
+                            [placeholder]="'******'" [label]="'Password'" [icon]="true">
+                            @if (passwordType === 'password'){
+                            <lucide-icon class="my-icon" size="20" name="eye" (click)="_handleTypeChange('text')" />
+                            }
+                            @else {
+                            <lucide-icon class="my-icon" size="20" name="eye-off"
+                                (click)="_handleTypeChange('password')" />
+                            }
+                        </app-textfield>
+                        <small class="text-danger"
+                            *ngIf="Password.touched && Password.errors?.['required'] || Password.errors?.['required'] && myform?.submitted">
+                            Please enter your password
+                        </small>
+                        <small class="text-danger"
+                            *ngIf="Password.touched && Password.errors?.['maxLength'] || Password.errors?.['maxLength'] && myform?.submitted">
+                            E-mail is in-valid
+                        </small>
+                    </div>
+                    <div class="sign_inAction">
+                        <app-button [type]="'submit'" [name]="'login'">Log in</app-button>
+                        <app-button [type]="'button'" [name]="'signup'" (_onClick)="_handleSignupClick($event)">
+                            Sign up
+                        </app-button>
+                    </div>
+                </form>
+                <div class="forgot_link">
+                    <a routerLink="/forgot-password">Forgot password</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

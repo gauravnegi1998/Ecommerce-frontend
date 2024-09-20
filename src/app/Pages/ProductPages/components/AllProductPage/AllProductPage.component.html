@@ -1,0 +1,63 @@
+<div class="container">
+    <app-button [type]="'button'" [class]="'profile_back_button'" [name]="'back-button'" (_onClick)="_handleBack()">
+        <lucide-icon name="arrow-left"></lucide-icon>
+    </app-button>
+    <div class="heading">
+        <h1>{{categoryName}}</h1>
+    </div>
+    <ng-container *ngIf="(productLists|length) > 0; else categoryTemp">
+
+        <div class="products_listing">
+            @for(product of productLists | paginate:config; track product; let index = $index){
+            <div class="product_card">
+                <div class="image_section">
+                    <img src="{{product?.normalImage}}" />
+                </div>
+                <div class="product_details">
+                    <div class="link title" [routerLink]="'/products/'+product?._id">
+                        <h3 class="hand_cursor">{{product?.name}}</h3>
+                    </div>
+                    <!-- {{product?.['avaliableStock']}} -->
+                    <div class="action_section">
+                        <div class="price_and_quantity">
+
+                            <div class="price_section">
+                                <p>{{product?.['price']?.normalPrice | currency}}</p>
+                                <small>{{product?.price?.offerPrice | currency}}</small>
+                            </div>
+                            <div class="quantity">
+                                <div class="qtyBtn">
+                                    <p>Quantity:</p>
+                                    <button (click)="activeClass=(activeClass === product?._id)?'':product?._id">
+                                        {{product?.quantity}} <i class="arrow down"></i>
+                                    </button>
+                                    <ul [class.active]="(activeClass===product?._id)">
+                                        <li *ngFor="let qty of _arrayConverter(product?.minimumOrderQuantity)"
+                                            (click)="_handleQty(qty,product?._id)">
+                                            {{qty}}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actionButtons">
+                            <app-button [type]="'button'" (_onClick)="_addToCart(product)">
+                                Add To Cart
+                            </app-button>
+                            <app-button [type]="'button'" (_onClick)="_addToCart(product)">
+                                Add To Wishlist
+                            </app-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+
+        </div>
+        <app-paginationComp [config]="config" (_onPageChange)="_handlePageChange($event)" />
+
+    </ng-container>
+    <ng-template #categoryTemp>
+        <div class="no_records">No record found</div>
+    </ng-template>
+</div>

@@ -1,0 +1,52 @@
+footer {
+
+    background: linear-gradient(355deg, #e56868, #ffff92);
+    // margin-top: 20px;
+    padding: 26px 0;
+
+    .footer_links {
+        display: flex;
+        gap: 40px;
+
+        .footerLogo {}
+
+        .links {
+            display: flex;
+            align-items: center;
+            flex: 1;
+            justify-content: space-between;
+
+            .shop_nev {
+                ul {
+                    list-style: none;
+                    padding: 0;
+
+                    li {
+                        margin-bottom: 6px;
+
+                        a {
+                            text-decoration: none;
+                            color: #000000;
+                            font-weight: 500;
+
+                            &:hover {
+                                border-bottom: 1px solid #ddd;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.copy-right {
+    text-align: center !important;
+    background: #444040;
+
+    h3 {
+        margin: 0;
+        color: #fff;
+        padding: 16px 0;
+    }
+}

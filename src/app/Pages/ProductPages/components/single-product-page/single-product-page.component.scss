@@ -1,0 +1,264 @@
+.singleProduct_page_section {
+    p {
+        font-size: 16px;
+
+        &.bold {
+            font-weight: 600;
+        }
+    }
+
+    .ProductInfo {
+        display: flex;
+        width: 100%;
+
+        .image_sections {
+            width: 100%;
+            max-width: 618px;
+            padding: 10px;
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+
+        .content_section {
+            width: 100%;
+            max-width: calc(100% - 618px);
+            padding: 10px;
+
+            .innerSec {
+                width: 100%;
+                max-width: 570px;
+                margin-left: auto;
+
+                h1 {
+                    font-weight: 600;
+                    font-size: 28px;
+                    line-height: 35px;
+                }
+
+                .description_sec {
+                    margin-bottom: 16px;
+                    // p {}
+                }
+
+                .price_sec {
+                    margin-bottom: 16px;
+
+                    .savingPriceOverride {
+                        font-size: 24px;
+                        font-weight: 300 !important;
+                        color: #CC0C39;
+                        margin-right: 3px;
+                        line-height: 30px;
+                    }
+
+                    .a-price-whole {
+                        font-size: 30px;
+                        font-weight: 600;
+                    }
+
+                    .a-size-small {
+                        font-size: 11px;
+                        font-weight: 300;
+                        color: #444d;
+                    }
+                }
+
+                .action_section {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 20px;
+
+                    .qty_sec {
+                        // select {
+                        //     padding: 4px 6px;
+                        //     background: #ddd;
+                        //     border: 1px solid #ddd;
+                        //     cursor: pointer;
+                        // }
+
+                        .qty {
+                            display: flex;
+                            column-gap: 4px;
+
+                            button {
+                                padding: 7px 12px;
+                                font-size: 20px;
+                                border: 1px solid #ff6521;
+                                background: #ff6521;
+                                color: #fff;
+                            }
+
+                            input {
+                                width: 100%;
+                                max-width: 40px;
+                                text-align: center;
+                                border: 1px solid #ff6030;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .review_Sections {
+        margin-top: 40px;
+
+        .rating_heading {
+            display: flex;
+            justify-content: space-between;
+            border-bottom: solid #ff6521;
+
+            .rating_count {
+                display: flex;
+                align-items: center;
+                column-gap: 10px;
+
+                h2 {
+                    margin: 0;
+                }
+
+                div:last-child {
+                    font-size: 20px;
+                }
+            }
+
+            .add_review {
+                font-size: 16px;
+                margin: 0;
+                padding-right: 15px;
+                line-height: 30px;
+                cursor: pointer;
+                font-weight: 600;
+                color: #ff9222;
+
+                &:hover {
+                    color: #ff6030;
+                }
+            }
+
+        }
+
+        .customer_reviews {
+            .reviewAdd_Form {
+                display: flex;
+                flex-direction: column;
+                margin-top: 20px;
+                gap: 20px;
+                background: #fff;
+                padding: 10px;
+
+                .rating_text {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    font-size: 20px;
+
+                    .rateSelection {}
+
+                    span {
+                        color: #d2691e;
+                    }
+                }
+
+                textarea {
+                    padding: 10px;
+                    font-size: 18px;
+                    border: 1px solid #ff6a00;
+
+                    &:focus-visible {
+                        outline: unset;
+                        box-shadow: 0 0 4px 1px #ff6a00;
+                    }
+                }
+
+                .actions_review_button {
+                    display: flex;
+                    gap: 20px;
+                }
+            }
+
+            .reviews {
+                margin: 25px 0;
+                display: flex;
+                flex-direction: column;
+                gap: 25px;
+
+                .details {
+                    h3 {
+                        margin-bottom: 11px;
+                        font-size: 24px;
+                    }
+                }
+
+                .stars {
+                    display: flex;
+                    align-items: center;
+
+                    svg.star_rating_icon {
+                        cursor: pointer;
+                    }
+
+                    span {
+                        margin-left: 12px;
+                        font-weight: 600;
+                    }
+                }
+
+                .purchase_date {
+                    .review-data {
+                        .a-color-secondary {
+                            &::after {
+                                content: '';
+                                border-right: 2px solid #8d8d8d;
+                                margin: 0 10px;
+                            }
+                        }
+
+                        .a-size-mini {
+                            font-size: 12px !important;
+                            line-height: 16px !important;
+                            color: #c45500 !important;
+                            font-weight: 600;
+                        }
+                    }
+                }
+
+                .edit_section {
+                    .edit {
+                        color: #ff6030;
+                        font-weight: 600;
+                        cursor: pointer;
+
+                        &:hover {
+                            border-bottom: 1px solid #ff6030;
+                        }
+                    }
+
+                    .border_class {
+                        &::after {
+                            content: '';
+                            border-right: 2px solid #8d8d8d;
+                            margin: 0 8px;
+                        }
+                    }
+
+                    .delete {
+                        color: #f00;
+                        font-weight: 600;
+                        cursor: pointer;
+
+                        &:hover {
+                            border-bottom: 1px solid #f00;
+                        }
+                    }
+                }
+            }
+
+
+        }
+    }
+}

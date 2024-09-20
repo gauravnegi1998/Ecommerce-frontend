@@ -1,0 +1,128 @@
+<ng-template #errorTemplate let-error>
+
+    @if(formGroupData(error?.name).touched || myForm.submitted){
+    @if(formGroupData(error?.name).errors?.['confirmValidation']){
+    <small class="text-danger">Password and confirm password should be same</small>
+    }
+    @if(formGroupData(error?.name).errors?.['required']){
+    <small class="text-danger">{{error?.msg}}</small>
+    }
+    @if(formGroupData(error?.name).errors?.['minlength'] || formGroupData(error?.name).errors?.['maxlength']){
+    <small class="text-danger">
+        Please enter atLeast {{formGroupData(error?.name).errors?.['minlength']?.requiredLength}} number
+    </small>
+    }
+
+    }
+
+</ng-template>
+
+
+<div class="container main_sighup_section">
+
+    <section [class]="!dialogValue ? 'main':''">
+        <app-button *ngIf="!dialogValue" [type]="'button'" [class]="'profile_back_button'" [name]="'back-button'"
+            (_onClick)="_handleBack()">
+            <lucide-icon name="arrow-left"></lucide-icon>
+        </app-button>
+        <div class="sighup_box">
+            <div *ngIf="!dialogValue" class="heading">
+                <h2>{{(section === "signup") ? 'Sign Up' : 'Update'}}</h2>
+            </div>
+            <div>
+                <form [formGroup]='signupFormGroup' (ngSubmit)="_handleSignupUp(signupFormGroup)" novalidate
+                    #myForm="ngForm">
+                    <div class="flex-box">
+                        <div class="form-Control">
+                            <app-textfield formControlName="firstName" [name]="'firstName'" [placeholder]="'First name'"
+                                [label]="'FirstName'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: { $implicit: { name: 'firstName', msg: 'Please enter your first name'} }" />
+                        </div>
+                        <div class="form-Control">
+                            <app-textfield formControlName="lastName" [name]="'lastName'" [placeholder]="'Last Name'"
+                                [label]="'Last Name'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: { $implicit: { name: 'lastName', msg: 'Please enter your last name'} }" />
+                        </div>
+                    </div>
+                    <app-countryState [(country)]="country" [(state)]="state" [(errors)]='errors' />
+                    <div class="flex-box">
+                        <div class="form-Control">
+                            <app-textfield formControlName="city" [name]="'city'" [placeholder]="'City'"
+                                [label]="'City'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: { $implicit: { name: 'city', msg: 'Please enter your city'} }" />
+                        </div>
+                        <div class="form-Control">
+                            <app-textfield formControlName="zipCode" [name]="'zipCode'" [placeholder]="'Zip Code'"
+                                [label]="'Zip Code'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: { $implicit: { name: 'zipCode', msg: 'Please enter your zip-code'} }" />
+                        </div>
+                    </div>
+                    <div class="form-Control">
+                        <app-textfield formControlName="email" [placeholder]="'demo@yopmail.com'" [label]="'E-mail'"
+                            [name]="'email'" />
+                        <ng-template
+                            *ngTemplateOutlet="errorTemplate; context: {$implicit: {name:'email', msg:'Please enter your email' } }"></ng-template>
+                    </div>
+                    <div class="flex-box">
+                        <div class="form-Control">
+                            <app-textfield formControlName="address" [placeholder]="'Address'" [label]="'Address'"
+                                [name]="'address'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: {$implicit: {name:'address', msg:'Please enter your address' } }"></ng-template>
+                        </div>
+                        <div class="form-Control">
+                            <app-textfield formControlName="address2" [placeholder]="'Address2'"
+                                [label]="'Address 2(Optional)'" [name]="'address2'" />
+                        </div>
+                    </div>
+                    <div class="flex-box">
+                        <div class="form-Control">
+                            <app-textfield formControlName="phoneNumber" [placeholder]="'Phone Number'"
+                                [label]="'Phone'" [name]="'phone'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: {$implicit: {name:'phoneNumber', msg:'Please enter your phone number' } }"></ng-template>
+                        </div>
+                        <div class="form-Control">
+                            <app-datePicker formControlName="birthday" [name]="'birthday'" [label]="'Birthday'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: {$implicit: {name:'birthday', msg:'Please enter your birthday' } }"></ng-template>
+                        </div>
+                    </div>
+                    @if(section === "signup"){
+                    <div class="flex-box">
+                        <div class="form-Control">
+                            <app-textfield [type]="'password'" formControlName="password" [placeholder]="'Password'"
+                                [label]="'Password'" [name]="'password'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: {$implicit: {name:'password', msg:'Please enter your password' } }"></ng-template>
+                        </div>
+                        <div class="form-Control">
+                            <app-textfield [type]="'password'" formControlName="confirmPassword"
+                                [placeholder]="'Confirm Password'" [label]="'Confirm Password'"
+                                [name]="'confirmPassword'" />
+                            <ng-template
+                                *ngTemplateOutlet="errorTemplate; context: {$implicit: {name:'confirmPassword', msg:'Please enter your confirm' } }"></ng-template>
+                        </div>
+                    </div>
+                    }
+
+                    <div class="action_section">
+                        <app-button [type]="'submit'" [name]="'signup'">
+                            {{(section === "signup") ? 'Create a customer' : 'Update Customer'}}
+                        </app-button>
+                    </div>
+                </form>
+            </div>
+            @if(responseMsg.error){
+            <p class="success-msg">{{responseMsg.msg}}</p>
+            }
+            @else {
+            <p class="error-msg">{{responseMsg.msg}}</p>
+            }
+        </div>
+    </section>
+</div>

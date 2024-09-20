@@ -1,0 +1,25 @@
+<div class="container">
+    <section class="collection_page">
+        <ng-container *ngIf="!productsDisplay">
+
+            <h1> Collection</h1>
+            <main>
+                <div class="collection_displayed">
+                    <div class="category_card hand_cursor" *ngFor="let item of catData; let i= index"
+                        (click)="_handleCategoryClick(item._id)">
+
+                        <div class="imageSection">
+                            <img src="../../../assets/logo.png" />
+                        </div>
+                        <div class="name">
+                            <h3 class="hand_cursor">{{item?.categoryName}}</h3>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </ng-container>
+        <router-outlet></router-outlet>
+    </section>
+
+
+</div>

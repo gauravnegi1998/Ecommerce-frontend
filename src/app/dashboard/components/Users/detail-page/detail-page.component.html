@@ -1,0 +1,55 @@
+<div class="container">
+    <div class="row">
+        <section class="main_detail">
+            <div class="userdetail_class">
+                <div class="imageSection">
+                    <!-- <h2>Profile</h2> -->
+                    <img class="image_div" src="https://i.pravatar.cc/180?id={{userDetail?._id}}" alt="dummy" />
+                </div>
+                <div class="public_details">
+                    <div class="info">
+                        <div>
+                            <p><span>First Name: </span></p>
+                            <p><span>{{userDetail?.firstName}}</span></p>
+                        </div>
+                        <div>
+                            <p><span>Last Name: </span></p>
+                            <p><span>{{userDetail?.lastName}}</span></p>
+                        </div>
+                        <div>
+                            <p><span>E-mail: </span></p>
+                            <p><span>{{userDetail?.email}}</span></p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <div>
+                            <p> <span>Address: </span></p>
+                            <p>
+                                <span>
+                                    {{userDetail?.address}}, {{userDetail?.country}},
+                                    {{userDetail?.state}},{{userDetail?.city}}, {{userDetail?.zipCode}}
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="info">
+                        <div>
+                            <p><span>Phone: </span></p>
+                            <p><span>{{userDetail?.phoneNumber}}</span></p>
+                        </div>
+                        <div>
+                            <p><span>Role: </span></p>
+                            <p><span>{{userDetail?.role}}</span></p>
+                        </div>
+                        <div>
+                            <p><span>DOB: </span></p>
+                            <p><span>{{userDetail?.birthday}}</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>

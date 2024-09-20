@@ -1,0 +1,149 @@
+.admin_dashboard {
+    height: 100vh;
+    overflow-x: hidden;
+
+    .col-md-12 {
+        padding: 0;
+    }
+
+    .nav-header {
+        border-bottom: 2px solid #ddd;
+        background: #fff;
+
+        .navbar {
+            padding: 12px 10px;
+        }
+    }
+
+
+    .admin_dashboard-content {
+        display: flex;
+        height: 851px;
+        background: #fff;
+        padding-top: 20px;
+
+        .section1 {
+            width: 100%;
+            max-width: 300px;
+
+            .menu_options {
+                // padding: 10px 15px;
+                padding: 0px 35px 10px 26px;
+
+                .profile_detail {
+                    display: flex;
+                    align-items: center;
+                    gap: 11px;
+                    border: 1px solid #ddd;
+                    padding: 8px 24px;
+                    border-radius: 5px;
+                    background: #dddddd2b;
+
+                    button {
+                        border: unset;
+                        border-radius: 30px;
+                        background: #ff6030;
+                        color: #ffff;
+                        font-size: 16px;
+                        width: 40px;
+                        height: 40px;
+                    }
+
+                    h3 {
+                        margin-bottom: 0px;
+                        font-weight: 600;
+                        font-size: 16px;
+                    }
+
+                    span {
+                        font-weight: 600;
+                        font-size: 14px;
+                        color: #b9b5b5;
+                    }
+                }
+
+                .menus {
+                    margin-top: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+
+                    .option {
+                        h2 {
+                            font-weight: 600;
+                            color: #bfbfbf;
+                            font-size: 16px;
+                            margin-bottom: 6px;
+
+                        }
+
+                        .child_options {
+                            list-style-type: none;
+                            padding: 0;
+                            margin-bottom: 0;
+                            display: flex;
+                            flex-direction: column;
+
+                            li {
+                                cursor: pointer;
+                                padding: 10px 2rem;
+                                font-size: 15px;
+                                border-radius: 5px;
+                                display: flex;
+                                gap: 14px;
+                                align-items: center;
+
+                                .option_icon {
+                                    color: #979797d4;
+                                }
+
+                                &.active {
+                                    background: rgb(255 101 33 / 23%);
+                                    color: #f76525;
+
+                                    .option_icon {
+                                        color: #f76525;
+                                    }
+                                }
+
+                                &:hover {
+                                    .option_icon {
+                                        color: #f76525;
+                                    }
+
+                                    color: #f76525;
+                                }
+
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+
+        .section2 {
+            width: 100%;
+
+            max-width: calc(100% - 300px);
+
+            &.panelHidden {
+                // max-width: calc(100% - 300px);
+                margin: 0 auto;
+            }
+
+            .content_data {
+                padding: 10px 30px 10px 0px;
+
+                .content_title {
+                    border-bottom: 2px solid #ddd;
+
+                    h2 {
+                        margin-bottom: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

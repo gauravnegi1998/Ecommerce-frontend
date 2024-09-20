@@ -1,0 +1,137 @@
+<ng-template #errorTemplate let-error>
+    @if(formGroupData(error?.name).touched || (myForm.submitted)){
+    @if(formGroupData(error?.name).errors?.['required']){
+    <span class="error-msg">This field is required</span>
+    }
+    @if(formGroupData(error?.name).errors?.['maxlength']){
+    <span class="error-msg">Number must be less then or equal to 6</span>
+    }
+    @if(formGroupData(error?.name).errors?.['onlyNumber']){
+    <span class="error-msg">Enter only number</span>
+    }
+
+    }
+</ng-template>
+
+<ng-template #errorPriceTemplate let-error>
+    @if(formPriceGroupData(error?.name).touched || (myForm.submitted)){
+    @if(formPriceGroupData(error?.name).errors?.['required']){
+    <span class="error-msg">This field is required</span>
+    }
+    @if(formPriceGroupData(error?.name).errors?.['maxlength']){
+    <span class="error-msg">Number must be less then or equal to 6</span>
+    }
+    @if(formPriceGroupData(error?.name).errors?.['onlyNumber']){
+    <span class="error-msg">Enter only number</span>
+    }
+    }
+
+</ng-template>
+
+<section class=" Product-add_section">
+    <form [formGroup]="ProductFormGroup" (ngSubmit)="_handleOnSubmit(myForm)" #myForm="ngForm" novalidate>
+        <div class="flex-box">
+            <div class="form-Control">
+                <app-textfield formControlName="itemId" [name]="'itemId'" [placeholder]="'Please enter your product ID'"
+                    [label]="'Product ID'" />
+                <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'itemId' } }" />
+            </div>
+            <div class="form-Control">
+                <app-textfield formControlName="name" [name]="'name'" [placeholder]="'Please enter your product name'"
+                    [label]="'Product Name'" />
+                <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'name' } }" />
+            </div>
+        </div>
+
+        <div class="flex-box">
+            <div class="form-Control">
+                <app-textfield formControlName="itemCode" [name]="'itemCode'"
+                    [placeholder]="'Please enter your product code'" [label]="'Product Code'" />
+                <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'itemCode' } }" />
+            </div>
+
+            <div class="form-Control flex_web_category">
+                <label for="webCategories">Web Categories</label>
+                <div class="categorySelection" *ngIf="(myOptions|length)> 0">
+                    <ngx-bootstrap-multiselect [options]="myOptions" [settings]="mySettings" [texts]="myTexts"
+                        formControlName="webCategories"></ngx-bootstrap-multiselect>
+                    <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'webCategories' } }" />
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <!-- <h3>Price's</h3> -->
+            <div formGroupName="price" class="flex-box">
+                <div class="form-Control">
+                    <app-textfield formControlName="normalPrice" [name]="'normalPrice'"
+                        [placeholder]="'Please enter your MRP price'" [label]="'MRP Price'" />
+                    <ng-template
+                        *ngTemplateOutlet="errorPriceTemplate; context:{ $implicit : { name:'normalPrice' } }" />
+                </div>
+                <div class="form-Control">
+                    <app-textfield formControlName="offerPrice" [name]="'offerPrice'"
+                        [placeholder]="'Please enter your Offer Price'" [label]="'Offer Price'" />
+                    <ng-template
+                        *ngTemplateOutlet="errorPriceTemplate; context:{ $implicit : { name:'offerPrice' } }" />
+                </div>
+            </div>
+        </div>
+        <div class="">
+            <div class="form-Control">
+                <app-textfield formControlName="normalImage" placeholder="Enter the Image Url" [label]="'Image URL'" />
+            </div>
+            <div class="form-Control">
+                <input type="file" formControlName="smallImage" placeholder="Enter the Image Url" />
+            </div>
+        </div>
+        <div class="flex-box">
+            <div class="form-Control">
+                <app-textfield formControlName="availableStock" [name]="'availableStock'"
+                    [placeholder]="'Please enter your available stock'" [label]="'Available Stock'" />
+                <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'availableStock' } }" />
+            </div>
+            <div class="form-Control">
+                <app-textfield formControlName="returnPolicy" [name]="'returnPolicy'"
+                    [placeholder]="'Please enter your returnPolicy'" [label]="'returnPolicy'" />
+                <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'returnPolicy' } }" />
+            </div>
+        </div>
+        <div class="">
+            <label for="">Description</label>
+            <div class="form-Control">
+                <textarea formControlName="description" placeholder="Enter the product Description" rows="8"></textarea>
+                <ng-template *ngTemplateOutlet="errorTemplate; context:{ $implicit : { name:'description' } }" />
+            </div>
+        </div>
+        <div class="switchButton_section">
+            <ng-container>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"
+                        formControlName="isEligibleForAutoOrder">
+                    <label class="form-check-label" for="flexSwitchCheckDefault">See for Subscription Order</label>
+                </div>
+            </ng-container>
+
+            <ng-container>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="hideFromWeb"
+                        formControlName="hideFromWeb">
+                    <label class="form-check-label" for="hideFromWeb">Hide Form Website</label>
+                </div>
+            </ng-container>
+
+            <ng-container>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" role="switch" id="displayOnlyAdmin"
+                        formControlName="displayOnlyAdmin">
+                    <label class="form-check-label" for="displayOnlyAdmin">Available for Admin only</label>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="ActionButtons">
+            <app-button [type]="'submit'">Add The Product</app-button>
+        </div>
+    </form>
+</section>

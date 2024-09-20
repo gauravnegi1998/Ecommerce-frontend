@@ -1,0 +1,12 @@
+<ng-container *ngIf="!AdminUrl">
+    <app-header></app-header>
+</ng-container>
+
+<router-outlet></router-outlet>
+<div class="main_layout">
+
+    <app-miniCart />
+</div>
+<ng-container *ngIf="!AdminUrl">
+    <app-footer></app-footer>
+</ng-container>

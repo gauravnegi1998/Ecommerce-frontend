@@ -1,0 +1,8 @@
+<div class="field_section">
+    <label *ngIf="!!inputLabel" [for]="name">{{inputLabel}}</label>
+    <div [class]="'d-flex'+' '+extraClass">
+        <input class="" placeholder="dd/mm/yyyy" [name]="name" [(ngModel)]="value" ngbDatepicker #d2="ngbDatepicker"
+            (ngModelChange)="_handleChange($event)" />
+        <button class="btn  bi bi-calendar3" (click)="d2.toggle()" type="button"></button>
+    </div>
+</div>

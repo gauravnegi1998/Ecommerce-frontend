@@ -1,0 +1,48 @@
+.field_section {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    label {
+        font-size: 14px;
+    }
+
+    .d-flex {
+        &:focus-visible {
+            box-shadow: 0 0 4px 1px #ff6a00;
+        }
+
+
+    }
+
+    input {
+        background: #fff;
+        padding: 12px 16px;
+        font-size: 15px;
+        border: 1px solid #ff6a00;
+        // width: 100%;
+        border-right: 0;
+
+        &:focus-visible {
+            outline: none;
+            // box-shadow: 0 0 4px 1px #ff6a00;
+        }
+    }
+
+    button {
+        border: 1px solid #ff6a00;
+        border-left: 0;
+        border-radius: 0;
+    }
+
+
+    .user_listing {
+        input {
+            padding: 4px;
+        }
+
+        button {
+            padding: 3px 4px;
+        }
+    }
+}
