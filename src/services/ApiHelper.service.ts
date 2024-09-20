@@ -34,6 +34,7 @@ export class ApiService {
     private createHeader(rest: boolean = false): HttpHeaders {
         let headers: HttpHeaders = new HttpHeaders({
             'Content-Type': "application/json",
+            'Access-Control-Allow-Origin': '*',
             'Accept': 'application/json',
             'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
             'Pragma': 'no-cache',
