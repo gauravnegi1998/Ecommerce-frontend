@@ -20,6 +20,7 @@ export interface ICustomerData {
     isUserLogin: boolean;
     address2: string;
     role?: string;
+    profileImage: string;
 }
 
 
@@ -47,7 +48,7 @@ export interface IReviewUpdateAndPostPayload {
 export interface IProductData {
     _id: string;
     name: string;
-    itemId: number;
+    itemId: string;
     normalImage: string
     largeImage: string;
     mediumImage: string;

@@ -12,7 +12,7 @@ export class CustomerService extends _asynchronousFunction {
     static customerUrl = '/api/customers'
 
     constructor(private api: ApiService) {
-        super()
+        super();
     }
 
     _getCustomerData(data: { searchValue?: string | null, page?: number }, callback?: (data: any) => void) {
@@ -57,6 +57,16 @@ export class CustomerService extends _asynchronousFunction {
 
     _updateCustomers(data: { id: string, data: ICustomerData }, callback?: (data: any) => void) {
         this._callTheAPi(this.api.put(`${CustomerService.customerUrl}/${data?.id}`, data?.data, true), (success, error) => {
+            if (error) {
+                // write a custom message
+            } else {
+                if (callback) callback(success);
+            }
+        })
+    }
+
+    _updateProfileImage(data: { formData: any, id: string | undefined }, callback?: (data: any) => void) {
+        this._callTheAPi(this.api.put(`${CustomerService.customerUrl}/${data?.id}/update-profile`, data?.formData, true), (success, error) => {
             if (error) {
                 // write a custom message
             } else {

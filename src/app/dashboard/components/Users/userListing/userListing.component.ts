@@ -82,7 +82,7 @@ export class UserListingComponent implements OnInit {
 
     public config: PaginationInstance = {
         id: 'listing_section',
-        itemsPerPage: 6,
+        itemsPerPage: 10,
         currentPage: 1,
         totalItems: 6
     };

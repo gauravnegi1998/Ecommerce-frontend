@@ -1,9 +1,10 @@
 <div class="container">
-    <app-button [type]="'button'" [class]="'profile_back_button'" [name]="'back-button'" (_onClick)="_handleBack()">
+    <app-button *ngIf="categoryName" [type]="'button'" [class]="'profile_back_button'" [name]="'back-button'"
+        (_onClick)="_handleBack()">
         <lucide-icon name="arrow-left"></lucide-icon>
     </app-button>
     <div class="heading">
-        <h1>{{categoryName}}</h1>
+        <h1>{{categoryName || "All Product's"}}</h1>
     </div>
     <ng-container *ngIf="(productLists|length) > 0; else categoryTemp">
 

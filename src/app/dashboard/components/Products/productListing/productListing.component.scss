@@ -1,0 +1,71 @@
+.product_listing {
+    width: 100%;
+    overflow-x: auto;
+    margin-bottom: 5px;
+    display: flex;
+    position: relative;
+
+    table {
+        &.first_table {
+            width: 100%;
+            // max-width: calc(100% - 200px);
+        }
+
+        &.second_table {
+            position: sticky;
+            right: 0;
+            background: #fff;
+            width: 100%;
+            max-width: 100px;
+
+            th,
+            td {
+                border-left: 1px solid #ff6521;
+            }
+        }
+
+        margin-bottom: 20px;
+
+        th {
+            color: #ff6521;
+        }
+
+        th,
+        td {
+            white-space: nowrap;
+            border-bottom: 1px solid #ff6521a8;
+            padding: 6px 10px;
+            height: 30px;
+            text-align: center;
+
+            .card-actions.d-flex {
+                gap: 10px;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.search_section {
+    padding: 30px 0 20px;
+    text-align: center;
+
+    .search_by_field {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 0 0 auto;
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ff6521;
+            margin: 0 auto;
+
+            &:focus-visible {
+                outline: none;
+            }
+        }
+    }
+
+}

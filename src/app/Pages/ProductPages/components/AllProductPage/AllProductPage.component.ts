@@ -27,7 +27,7 @@ export class AllProductPageComponent extends _cartAddFunctions implements OnInit
 
 
     productLists: IProductDataQty[] = [];
-    categoryName: string = "All Product's"
+    categoryName: string = ""
     quantity: number = 1;
     config: PaginationInstance = {
         id: "allProduct_page",
@@ -57,7 +57,7 @@ export class AllProductPageComponent extends _cartAddFunctions implements OnInit
         this.productService._getAllProduct({ catId, page: (page || this.config.currentPage), limit: this.config.itemsPerPage }, (response) => {
             this.productLists = _.map(response?.data?.product_data, (r) => ({ ...r, quantity: 1 }));
             this.config = { ...this.config, totalItems: response?.data?.totalCount, currentPage: +response?.data?.page };
-            this.categoryName = response?.data?.categoryName || "All Product's";
+            this.categoryName = response?.data?.categoryName || "";
             window.scrollTo({ top: 0, behavior: "smooth" });
         })
     }

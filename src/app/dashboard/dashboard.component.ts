@@ -8,11 +8,13 @@ import { DetailPageComponent } from "./components/Users/detail-page/detail-page.
 import { UserListingComponent } from "./components/Users/userListing/userListing.component";
 import { AuthServices } from '../../services/AuthServices.service';
 import { ICustomerData } from '../module/commonInterfaces';
+import { ProductListingComponent } from "./components/Products/productListing/productListing.component";
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, InputModules, LucideAngularModule, DetailPageComponent, UserListingComponent],
+  imports: [CommonModule, InputModules, LucideAngularModule, DetailPageComponent, UserListingComponent, ProductListingComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
   providers: [
@@ -22,11 +24,16 @@ import { ICustomerData } from '../module/commonInterfaces';
 export class DashboardComponent implements OnInit {
   loginUserData!: ICustomerData;
   isActivePanel: boolean = true;
-  constructor(private auth: AuthServices) { }
+  constructor(private auth: AuthServices, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     const LOGIN_USER_DATA = this.auth._getUserData();
     this.loginUserData = LOGIN_USER_DATA;
+
+    this.route.queryParams.subscribe((QUERY_PARAM) => {
+      console.log(QUERY_PARAM, 'QUERY_PARAM > > > > > > > > > > > > > >');
+      this.activeOption = QUERY_PARAM['p'] || "";
+    })
   }
 
   ComponentMap = {
@@ -67,6 +74,7 @@ export class DashboardComponent implements OnInit {
 
   handleActiveClass(option: string) {
     this.activeOption = option;
+    this.router.navigate(['/admin/dashboard'], { queryParams: { p: option }, queryParamsHandling: 'merge' });
   }
 
 }

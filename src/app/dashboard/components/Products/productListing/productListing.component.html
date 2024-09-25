@@ -1,0 +1,57 @@
+<div class="">
+    <div class="search_section">
+        <div class="search_by_field">
+            <input type="text" placeholder="Search Product" [(ngModel)]="searchText"
+                (ngModelChange)="_handelSearch($event)" />
+        </div>
+    </div>
+
+    <div class="product_listing">
+        <table class="first_table">
+            <thead>
+                <tr>
+                    @for(heading of theadData; track heading; let i= $index){
+                    <th>{{heading}}</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @for(productList of allProducts| paginate:config; track productList; let index = $index){
+                <tr>
+                    <td *ngFor="let item of _userDataKeys">
+                        <span> {{_userValue(productList, item)}}</span>
+                    </td>
+                    <td class="">
+                        <div class="card-actions d-flex">
+                            <app-button [type]="'button'" [class]="'edit action_detail'" name="'edit'"
+                                (_onClick)="_handleRedirect('edit',productList)">
+                                <lucide-icon class="my-icon" size="20" name="pencil" />
+                            </app-button>
+                            <app-button [type]="'button'" [class]="'delete action_detail'" name="'delete'"
+                                (_onClick)="_handleRedirect('delete',productList)">
+                                <lucide-icon class="my-icon" size="20" name="trash" />
+                            </app-button>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <app-paginationComp [config]="config" (_onPageChange)="_handlePageChange($event)" />
+
+    <ng-template #myTemplate class="">
+        <h2 mat-dialog-title>Confirmation</h2>
+        <mat-dialog-content>
+            <p>Are you sure you want to delete {{selectedProduct['itemId']||""}} ({{selectedProduct['itemCode']}})</p>
+        </mat-dialog-content>
+        <mat-dialog-actions class="actions">
+            <button mat-button (click)="_handelDeleteUser()" cdkFocusInitial>Yes</button>
+            <button mat-button [mat-dialog-close]>No</button>
+        </mat-dialog-actions>
+    </ng-template>
+
+
+
+
+</div>

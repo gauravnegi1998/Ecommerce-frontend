@@ -33,12 +33,13 @@ export class ApiService {
 
     private createHeader(rest: boolean = false): HttpHeaders {
         let headers: HttpHeaders = new HttpHeaders({
-            'Content-Type': "application/json",
+            // 'Content-Type': "application/json",
+            // 'Content-Type': "application/octet-stream",
             'Access-Control-Allow-Origin': '*',
-            'Accept': 'application/json',
-            'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
-            'Pragma': 'no-cache',
-            'Expires': '0'
+            // 'Accept': 'application/json',
+            // 'Cache-Control': 'no-cache, no-store, must-revalidate, post-check=0, pre-check=0',
+            // 'Pragma': 'no-cache',
+            // 'Expires': '0'
         })
         if (rest) {
             headers = headers.set('authorization', (this.localStore?.getItem('Token')) ? `Bearer ${this.localStore?.getItem('Token')}` : '');

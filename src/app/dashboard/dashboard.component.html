@@ -34,8 +34,9 @@
                                 $index){
                                 <li [ngClass]='{"active":(childOptions.label === activeOption)}'
                                     (click)="handleActiveClass(childOptions.label)">
-                                    <span><lucide-icon size="20" name={{childOptions.icon}}
-                                            class="option_icon" /></span>
+                                    <span>
+                                        <lucide-icon size="20" name={{childOptions.icon}} class="option_icon" />
+                                    </span>
                                     <span>{{childOptions.label}}</span>
                                 </li>
                                 }
@@ -52,11 +53,10 @@
                     </div>
                     @switch (activeOption) {
                     @case ("Customers") {
-                    <div><app-userDetail /></div>
+                    <app-userDetail />
                     }
                     @case ("Products") {
-                    <div></div>
-
+                    <app-productListing />
                     }
                     @case ("All files") {
                     <div></div>
