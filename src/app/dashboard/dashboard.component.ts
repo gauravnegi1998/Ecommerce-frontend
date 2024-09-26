@@ -32,7 +32,7 @@ export class DashboardComponent implements OnInit {
 
     this.route.queryParams.subscribe((QUERY_PARAM) => {
       console.log(QUERY_PARAM, 'QUERY_PARAM > > > > > > > > > > > > > >');
-      this.activeOption = QUERY_PARAM['p'] || "";
+      this.activeOption = QUERY_PARAM['p'] || "Customers";
     })
   }
 
