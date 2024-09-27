@@ -42,18 +42,6 @@ export const routes: Routes = [
                 loadComponent: () => import('./Pages/Auth/signup/signup.component').then((m) => m.SignupComponent)
             },
             {
-                path: 'listing',
-                loadComponent: () => import('./dashboard/components/Users/userListing/userListing.component').then((m) => m.UserListingComponent),
-                pathMatch: 'full',
-                canActivate: [AuthGuardService]
-            },
-            {
-                path: 'detail/:id',
-                loadComponent: () => import('./dashboard/components/Users/detail-page/detail-page.component').then((m) => m.DetailPageComponent),
-                pathMatch: 'full',
-                canActivate: [AuthGuardService]
-            },
-            {
                 path: "edit/:id",
                 loadComponent: () => import('./Pages/Auth/update-profile/update-profile.component').then(r => r.UpdateProfileComponent),
                 canActivate: [AuthGuardService]
@@ -62,6 +50,11 @@ export const routes: Routes = [
             {
                 path: 'products',
                 loadChildren: () => import('./Pages/ProductPages/ProductPage-routes').then(features => features.ProductPagesRoutes),
+            },
+            {
+                path: 'view_cart',
+                pathMatch: "full",
+                loadComponent: () => import('./Pages/viewCart/view-cart.component').then(features => features.ViewCartComponent),
             },
             {
                 path: 'collections',

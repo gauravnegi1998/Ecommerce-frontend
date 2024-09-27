@@ -9,6 +9,7 @@ import { PipesModules } from "../../pipes/pipes.module";
 import { AuthServices } from "../../../services/AuthServices.service";
 import { InputModules } from "../../inputs/inputs.module";
 import _ from "lodash";
+import { Router } from "@angular/router";
 
 @Component({
     selector: "app-miniCart",
@@ -23,9 +24,8 @@ import _ from "lodash";
 
 export class MiniCartComponent extends _cartAddFunctions implements OnInit, OnChanges {
 
-    cartData: ICartData[] = [];
     open: boolean = false;
-    constructor() {
+    constructor(private router: Router) {
         super();
 
     }
@@ -34,10 +34,6 @@ export class MiniCartComponent extends _cartAddFunctions implements OnInit, OnCh
         return this.minCartApi.totalCartAmount;
     }
     ngOnInit(): void {
-
-        this.minCartApi.cartDetails$.subscribe((data) => {
-            this.cartData = data;
-        })
         this.minCartApi.openMiniCart$.subscribe((value) => {
             this.open = value;
         })
@@ -55,18 +51,11 @@ export class MiniCartComponent extends _cartAddFunctions implements OnInit, OnCh
 
     _checkoutClick(value: string) {
         console.log(value, '>>>>>>>>>>>>>>>>>>>>')
+        this.router.navigateByUrl(`/${value}`);
+        this.open = false;
     }
 
-    _quantityUpdate(cartId: string, action: string = "sub") {
-        const FIND_PRODUCT: ICartData | undefined = _.find(this.cartData, { _id: cartId });
-        let REMAIN_DATA = [];
-        if (FIND_PRODUCT) {
-            FIND_PRODUCT['quantity'] = action === "sub" ? (FIND_PRODUCT['quantity'] - 1 > 0 ? FIND_PRODUCT['quantity'] - 1 : 1) : FIND_PRODUCT['quantity'] + 1;
-            REMAIN_DATA = [..._.reject(this.cartData, { _id: cartId }), FIND_PRODUCT];
-            console.log(REMAIN_DATA, FIND_PRODUCT, 'REMAIN_DATA')
-            this.minCartApi._updateQuantityCart(_.map(REMAIN_DATA, (r) => ({ productID: r.productId, quantity: r?.quantity })))
-        }
-    }
+
 
     // ngOnDestroy(): void {
     //     this.open$.unsubscribe()
