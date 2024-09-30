@@ -30,4 +30,9 @@ export class ViewCartComponent extends _cartAddFunctions implements OnInit {
 
     }
 
+    _removeCartData(cartId: string) {
+        console.log(cartId, 'isPasswordChange')
+        this.minCartApi._removeSingleCart(cartId);
+    }
+
 }

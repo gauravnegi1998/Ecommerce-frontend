@@ -1,34 +1,50 @@
 <div class="container view_main_container">
-    <div class="table_hading">
-        <ul>
-            <li class="heading1">Product Image</li>
-            <li class="heading2">Name</li>
-            <li class="heading3">Quantity</li>
-            <li class="heading4">Price</li>
-            <li class="heading5">Actions</li>
-        </ul>
-    </div>
-    <div class="table_data">
-        <ul *ngFor="let item of cartData; let i= index">
-            <li class="listing1">
-                <div class="image_section">
-                    <img src={{item.normalImage}} />
-                </div>
-            </li>
-            <li class="listing2">{{item.shortName}}</li>
-            <li class="listing3">
-                <div class="min_content">
-                    <div class="qty">
-                        <button type="button" (click)="_quantityUpdate(item._id,'sub')">-</button>
-                        <input type="text" readonly value="{{item.quantity}}" />
-                        <button type="button" (click)="_quantityUpdate(item._id,'add')">+</button>
+    <div class="mainViewCart">
+        <div class="table_hading">
+            <ul>
+                <li class="heading1">Product Image</li>
+                <li class="heading2">Name</li>
+                <li class="heading3">Quantity</li>
+                <li class="heading4">Price</li>
+                <li class="heading5">Actions</li>
+            </ul>
+        </div>
+        <div class="table_data">
+            <ul *ngFor="let item of cartData; let i= index">
+                <li class="listing1">
+                    <div class="image_section">
+                        <img src={{item.normalImage}} />
                     </div>
-                </div>
-            </li>
-            <li class="listing4">{{item.price}}</li>
-            <li class="listing5">
-                <lucide-icon name="trash" class="delete_icons" color="#f00" />
-            </li>
-        </ul>
+                </li>
+                <li class="listing2">{{item.shortName}}</li>
+                <li class="listing3">
+                    <div class="min_content">
+                        <div class="qty">
+                            <button type="button" (click)="_quantityUpdate(item._id,'sub')">-</button>
+                            <input type="text" readonly value="{{item.quantity}}" />
+                            <button type="button" (click)="_quantityUpdate(item._id,'add')">+</button>
+                        </div>
+                    </div>
+                </li>
+                <li class="listing4">{{item.price |currency}}</li>
+                <li class="listing5">
+                    <lucide-icon name="trash" class="delete_icons hand_cursor" color="#f00"
+                        (click)="_removeCartData(item._id)" />
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="total_sections">
+        <div class="amounts_section">
+            <div class="amount">
+                <span>SubTotal: </span><span>$20000</span>
+            </div>
+            <div class="amount">
+                <span>Tax Amount: </span><span>$2500</span>
+            </div>
+            <div class="amount">
+                <span>Total: </span><span>$20000</span>
+            </div>
+        </div>
     </div>
 </div>
