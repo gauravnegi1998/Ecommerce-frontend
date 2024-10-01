@@ -99,7 +99,8 @@
                     display: flex;
                     width: 100%;
                     justify-content: space-between;
-                    align-items: flex-end;
+                    // align-items: flex-end;
+                    align-items: flex-start;
 
                     .quantity {
                         padding-right: 10px;
@@ -175,8 +176,8 @@
 
                     .price_section {
                         display: flex;
-                        align-items: flex-end;
                         gap: 10px;
+                        flex-direction: column;
 
                         p {
                             font-size: 30px;

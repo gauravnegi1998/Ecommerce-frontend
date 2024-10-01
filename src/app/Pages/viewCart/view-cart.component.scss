@@ -139,4 +139,14 @@
             }
         }
     }
+
+    .cart-empty {
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        margin: 30px 0;
+        font-size: 18px;
+    }
 }

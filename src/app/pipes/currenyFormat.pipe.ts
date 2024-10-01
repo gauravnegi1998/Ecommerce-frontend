@@ -11,7 +11,7 @@ export class CurrencyFormatterPipe implements PipeTransform {
     formatNumberWithCommas(number: string) {
         const formatter = new Intl.NumberFormat('en-US');
         const formattedNumber = formatter.format(+number);
-        return formattedNumber && formattedNumber?.split('.')?.[1]?.length === 1 ? formattedNumber + '0' : formattedNumber;
+        return formattedNumber && formattedNumber?.split('.')?.[1]?.length === 1 ? formattedNumber + '0' : formattedNumber + '.00';
     }
 
     transform(value: any, ...args: any[]) {

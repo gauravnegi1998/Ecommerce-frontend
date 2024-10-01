@@ -1,4 +1,6 @@
 .action_button {
+    text-align: center;
+
     button {
         padding: 12px 30px;
         font-size: 16px;
@@ -40,6 +42,12 @@
         &.action_detail {
             padding: 6px;
             border-radius: 30px;
+        }
+
+        &.view_cartButton {
+            width: 100%;
+            max-width: 330px;
+            margin: 12px 0;
         }
     }
 }

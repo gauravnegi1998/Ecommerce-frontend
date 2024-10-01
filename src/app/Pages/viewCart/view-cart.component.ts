@@ -4,11 +4,14 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from "@angular/forms";
 import { LUCIDE_ICONS, LucideAngularModule, LucideIconProvider } from "lucide-angular";
 import { Icons } from "../../Common/Icons";
+import { InputModules } from "../../inputs/inputs.module";
+import { Router } from "@angular/router";
+import { PipesModules } from "../../pipes/pipes.module";
 
 @Component({
     selector: "app-viewCart",
     standalone: true,
-    imports: [CommonModule, FormsModule, LucideAngularModule],
+    imports: [CommonModule, FormsModule, LucideAngularModule, InputModules, PipesModules],
     templateUrl: "./view-cart.component.html",
     styleUrl: "./view-cart.component.scss",
     providers: [
@@ -18,7 +21,7 @@ import { Icons } from "../../Common/Icons";
 
 export class ViewCartComponent extends _cartAddFunctions implements OnInit {
 
-    constructor() {
+    constructor(private router: Router) {
         super()
     }
 
@@ -33,6 +36,10 @@ export class ViewCartComponent extends _cartAddFunctions implements OnInit {
     _removeCartData(cartId: string) {
         console.log(cartId, 'isPasswordChange')
         this.minCartApi._removeSingleCart(cartId);
+    }
+
+    _redirectToCheckout() {
+        this.router.navigateByUrl('/checkout');
     }
 
 }
